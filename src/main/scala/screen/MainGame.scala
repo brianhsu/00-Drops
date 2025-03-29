@@ -37,6 +37,7 @@ class MainGame extends ApplicationListener {
     ScreenUtils.clear(Color.DARK_GRAY)
 
     spriteBatch.begin()
+    spriteBatch.
     dropsController.draw(spriteBatch)
     bucket.draw(spriteBatch)
     spriteBatch.end()

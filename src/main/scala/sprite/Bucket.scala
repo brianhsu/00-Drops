@@ -24,8 +24,8 @@ class Bucket extends InputAdapter {
     val offsetX = currentSpeedX * Gdx.graphics.getDeltaTime
     val offsetY = currentSpeedY * Gdx.graphics.getDeltaTime
 
-    this.sprite.setX(Math.clamp(this.sprite.getX + offsetX, 0, 1080 - Textures.bucket.getWidth))
-    this.sprite.setY(Math.clamp(this.sprite.getY + offsetY, 0, 720 - Textures.bucket.getHeight))
+    this.sprite.setX(Math.clamp(this.sprite.getX + offsetX, 0, GameWorld.WIDTH - Textures.bucket.getWidth))
+    this.sprite.setY(Math.clamp(this.sprite.getY + offsetY, 0, GameWorld.HEIGHT - Textures.bucket.getHeight))
   }
 
   override def keyDown(keycode: Int): Boolean = {
@@ -63,7 +63,7 @@ class Bucket extends InputAdapter {
 
   override def mouseMoved(screenX: Int, screenY: Int): Boolean = {
     this.sprite.setX(screenX)
-    this.sprite.setY(720 - screenY)
+    this.sprite.setY(GameWorld.HEIGHT - screenY)
     false
   }
 }

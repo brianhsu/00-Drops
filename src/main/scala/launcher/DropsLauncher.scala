@@ -10,7 +10,7 @@ object DropsLauncher {
     val config = new Lwjgl3ApplicationConfiguration
 
     config.setTitle("Drops")
-    config.setWindowedMode(1080, 720)
+    config.setWindowedMode(GameWorld.WIDTH, GameWorld.HEIGHT)
     config.setForegroundFPS(144)
     config.useVsync(false)
 

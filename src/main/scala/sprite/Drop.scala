@@ -25,8 +25,8 @@ class Drop {
   private def createSpriteWithRandomX(): Sprite = {
     val sprite = new Sprite(Textures.drop)
 
-    sprite.setX(Random.between(0, 1080 - Textures.drop.getWidth))
-    sprite.setY(720)
+    sprite.setX(Random.between(0, GameWorld.WIDTH - Textures.drop.getWidth))
+    sprite.setY(GameWorld.HEIGHT)
 
     sprite
   }
