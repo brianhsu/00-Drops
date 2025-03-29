@@ -1,19 +1,20 @@
 package coding.games
 package screen
 
-import coding.games.sprite.Bucket
-import com.badlogic.gdx.Input.Keys
+import core.DropsController
+import sprite.Bucket
+
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.{Color, Texture}
 import com.badlogic.gdx.utils.ScreenUtils
 import com.badlogic.gdx.{ApplicationListener, Gdx}
 
 class MainGame extends ApplicationListener {
 
-
   private lazy val spriteBatch = new SpriteBatch()
 
   private val bucket = new Bucket
+  private val dropsController = new DropsController
 
   override def create(): Unit = {
     Gdx.input.setInputProcessor(bucket)
@@ -22,8 +23,13 @@ class MainGame extends ApplicationListener {
   override def resize(width: Int, height: Int): Unit = {}
 
   override def render(): Unit = {
-    bucket.updateGameWorld()
+    updateGameWorld()
     drawGameWorld()
+  }
+
+  private def updateGameWorld(): Unit = {
+    dropsController.updateGameWorld()
+    bucket.updateGameWorld()
   }
 
 
@@ -31,7 +37,8 @@ class MainGame extends ApplicationListener {
     ScreenUtils.clear(Color.DARK_GRAY)
 
     spriteBatch.begin()
-    spriteBatch.draw(bucket.texture, bucket.positionX, bucket.positionY)
+    dropsController.draw(spriteBatch)
+    bucket.draw(spriteBatch)
     spriteBatch.end()
   }
 
@@ -40,7 +47,7 @@ class MainGame extends ApplicationListener {
   override def resume(): Unit = {}
 
   override def dispose(): Unit = {
-    bucket.texture.dispose()
+    Textures.dispose()
     spriteBatch.dispose()
   }
 }
