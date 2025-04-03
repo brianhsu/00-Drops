@@ -20,7 +20,9 @@ class MainGame extends ApplicationListener {
     Gdx.input.setInputProcessor(bucket)
   }
 
-  override def resize(width: Int, height: Int): Unit = {}
+  override def resize(width: Int, height: Int): Unit = {
+    GameWorld.FIT_VIEWPORT.update(width, height, true)
+  }
 
   override def render(): Unit = {
     updateGameWorld()
@@ -37,6 +39,8 @@ class MainGame extends ApplicationListener {
     ScreenUtils.clear(Color.DARK_GRAY)
 
     spriteBatch.begin()
+    spriteBatch.setProjectionMatrix(GameWorld.FIT_VIEWPORT.getCamera.combined)
+    spriteBatch.draw(Textures.background, 0, 0, GameWorld.WIDTH, GameWorld.HEIGHT)
     dropsController.draw(spriteBatch)
     bucket.draw(spriteBatch)
     spriteBatch.end()
