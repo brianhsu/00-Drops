@@ -4,6 +4,7 @@ package sprite
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.{Sprite, SpriteBatch}
+import com.badlogic.gdx.math.Rectangle
 
 import scala.util.Random
 
@@ -19,6 +20,8 @@ class Drop {
   def draw(spriteBatch: SpriteBatch): Unit = {
     this.sprite.draw(spriteBatch)
   }
+
+  def collisionArea: Rectangle = this.sprite.getBoundingRectangle
 
   def isFalloutOfScreen: Boolean = this.sprite.getY < -this.sprite.getHeight
 
