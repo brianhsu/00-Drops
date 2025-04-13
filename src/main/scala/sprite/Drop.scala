@@ -4,6 +4,7 @@ package sprite
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.{Sprite, SpriteBatch}
+import com.badlogic.gdx.math.Rectangle
 
 import scala.util.Random
 
@@ -11,6 +12,8 @@ class Drop {
 
   private val fallingSpeed = Random.between(2, 20)
   private lazy val sprite: Sprite = createSpriteWithRandomX()
+
+  def collisionArea: Rectangle = this.sprite.getBoundingRectangle
 
   def updateGameWorld(): Unit = {
     this.sprite.translateY(-fallingSpeed * Gdx.graphics.getDeltaTime)

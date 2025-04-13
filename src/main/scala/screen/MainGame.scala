@@ -14,10 +14,13 @@ class MainGame extends ApplicationListener {
   private lazy val spriteBatch = new SpriteBatch()
 
   private val bucket = new Bucket
-  private val dropsController = new DropsController
+  private val dropsController = new DropsController(bucket)
 
   override def create(): Unit = {
     Gdx.input.setInputProcessor(bucket)
+    Sounds.backgroundMusic.setVolume(0.25f)
+    Sounds.backgroundMusic.setLooping(true)
+    Sounds.backgroundMusic.play()
   }
 
   override def resize(width: Int, height: Int): Unit = {
@@ -53,5 +56,6 @@ class MainGame extends ApplicationListener {
   override def dispose(): Unit = {
     Textures.dispose()
     spriteBatch.dispose()
+    Sounds.dispose()
   }
 }

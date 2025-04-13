@@ -1,12 +1,12 @@
 package coding.games
 package core
 
-import sprite.Drop
+import sprite.{Bucket, Drop}
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
-class DropsController {
+class DropsController(bucket: Bucket) {
   private var drops: List[Drop] = Nil
 
   private var timerInSeconds: Float = 100
@@ -22,6 +22,17 @@ class DropsController {
 
     drops.foreach(_.updateGameWorld())
     drops = drops.filterNot(_.isFalloutOfScreen)
+      .filterNot(isDropCaught)
+  }
+
+  private def isDropCaught(drop: Drop): Boolean = {
+    val isCaught = bucket.collisionArea.overlaps(drop.collisionArea)
+
+    if (isCaught) {
+      Sounds.dropSound.play()
+    }
+
+    isCaught
   }
 
   def draw(spriteBatch: SpriteBatch): Unit = {
