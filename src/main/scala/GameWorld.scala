@@ -7,4 +7,5 @@ object GameWorld {
   val HEIGHT = 64 // 64 公分
 
   val FIT_VIEWPORT = new FitViewport(GameWorld.WIDTH, GameWorld.HEIGHT)
+  val UI_VIEWPORT = new FitViewport(1024, 640)
 }

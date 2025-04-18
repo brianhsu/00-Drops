@@ -6,7 +6,7 @@ import sprite.{Bucket, Drop}
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
-class DropsController(bucket: Bucket) {
+class DropsController(bucket: Bucket, scoreController: ScoreController) {
   private var drops: List[Drop] = Nil
 
   private var timerInSeconds: Float = 100
@@ -21,8 +21,18 @@ class DropsController(bucket: Bucket) {
     }
 
     drops.foreach(_.updateGameWorld())
-    drops = drops.filterNot(_.isFalloutOfScreen)
+    drops = drops.filterNot(isLostLife)
       .filterNot(isDropCaught)
+  }
+
+  private def isLostLife(drop: Drop): Boolean = {
+    val isFallout = drop.isFalloutOfScreen
+
+    if (isFallout) {
+      scoreController.lostLife()
+    }
+
+    isFallout
   }
 
   private def isDropCaught(drop: Drop): Boolean = {
@@ -30,6 +40,7 @@ class DropsController(bucket: Bucket) {
 
     if (isCaught) {
       Sounds.dropSound.play()
+      scoreController.scored()
     }
 
     isCaught
