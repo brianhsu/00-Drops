@@ -1,7 +1,7 @@
 package coding.games
 package screen
 
-import core.{DropsController, ScoreController}
+import core.{DropsController, GameController, ScoreController}
 import sprite.Bucket
 
 import com.badlogic.gdx.graphics.Color
@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, SpriteBatch}
 import com.badlogic.gdx.utils.ScreenUtils
-import com.badlogic.gdx.{ApplicationListener, Gdx}
+import com.badlogic.gdx.{ApplicationListener, Gdx, Screen}
 
-class MainGame extends ApplicationListener {
+class MainGameScreen(gameController: GameController) extends Screen {
 
   private lazy val spriteBatch = new SpriteBatch()
 
@@ -19,11 +19,16 @@ class MainGame extends ApplicationListener {
   private val scoreController = new ScoreController
   private val dropsController = new DropsController(bucket, scoreController)
 
-  override def create(): Unit = {
+  override def show(): Unit = {
     Gdx.input.setInputProcessor(bucket)
     Sounds.backgroundMusic.setVolume(0.25f)
     Sounds.backgroundMusic.setLooping(true)
     Sounds.backgroundMusic.play()
+  }
+
+  override def hide(): Unit = {
+    Sounds.backgroundMusic.stop()
+    Gdx.input.setInputProcessor(null)
   }
 
   override def resize(width: Int, height: Int): Unit = {
@@ -31,12 +36,17 @@ class MainGame extends ApplicationListener {
     GameWorld.UI_VIEWPORT.update(width, height, true)
   }
 
-  override def render(): Unit = {
+  override def render(delta: Float): Unit = {
     updateGameWorld()
     drawGameWorld()
   }
 
   private def updateGameWorld(): Unit = {
+
+    if (scoreController.isDead) {
+      gameController.gameOver()
+    }
+
     dropsController.updateGameWorld()
     bucket.updateGameWorld()
   }

@@ -1,7 +1,8 @@
 package coding.games
 package launcher
 
-import coding.games.screen.MainGame
+import coding.games.core.GameController
+import coding.games.screen.MainGameScreen
 import com.badlogic.gdx.backends.lwjgl3.{Lwjgl3Application, Lwjgl3ApplicationConfiguration}
 
 object DropsLauncher {
@@ -18,7 +19,7 @@ object DropsLauncher {
   }
 
   def main(args: Array[String]): Unit = {
-    new Lwjgl3Application(new MainGame, applicationConfiguration)
+    new Lwjgl3Application(new GameController, applicationConfiguration)
     println("Hello World")
   }
 }

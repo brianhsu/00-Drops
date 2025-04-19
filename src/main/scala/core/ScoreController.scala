@@ -13,6 +13,8 @@ class ScoreController {
 
   private lazy val bitmapFont = generateFont(30)
 
+  def isDead: Boolean = life <= 0
+
   def scored(): Unit = {
     score += 200
   }
