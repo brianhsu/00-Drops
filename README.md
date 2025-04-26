@@ -3,6 +3,15 @@
 
 這是 libGDX 教學系列影片「自己的遊戲自己寫」的第一個小遊戲。這個教學影片系列的目標，是實作 20 Games Challenge 裡的 2D 小遊戲，並將過程記錄下來。Part 0 的部份是 libGDX 的基礎教學，由官方文件 A Simple Game 修改而來。
 
+EP10
+---------------
+
+使用 Screen 介面與 Game 抽象類別，實作遊戲場景的切換。幫我們的小遊戲加上歡迎畫面與 Game Over 畫面，完成我們第一個從無到有的小遊戲！
+
+[YouTube 影片](https://youtu.be/VkbOjBVPRCY)
+[![教學影片](https://img.youtube.com/vi/VkbOjBVPRCY/default.jpg)](https://youtu.be/VkbOjBVPRCY)
+
+
 EP09
 ---------------
 

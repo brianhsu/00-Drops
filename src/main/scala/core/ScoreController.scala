@@ -20,6 +20,8 @@ class ScoreController {
   def lostLife(): Unit = {
     life -= 1
   }
+  
+  def isDead: Boolean = life <= 0
 
   def draw(spriteBatch: SpriteBatch): Unit = {
     spriteBatch.setProjectionMatrix(GameWorld.UI_VIEWPORT.getCamera.combined)
